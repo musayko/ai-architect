@@ -48,7 +48,7 @@ cd ai-architect
 ```bash
 # If ai-architect-backend folder doesn't exist or is empty:
 # mkdir -p ai-architect-backend 
-git clone <your_backend_repo_url> ai-architect-backend
+git clone https://github.com/musayko/ai-architect-backend.git ai-architect-backend
 ```
 
 #### Frontend:  
@@ -57,7 +57,7 @@ git clone <your_backend_repo_url> ai-architect-backend
 ```bash
 # If ai-architect-frontend folder doesn't exist or is empty:
 # mkdir -p ai-architect-frontend
-git clone <your_frontend_repo_url> ai-architect-frontend
+git clone https://github.com/musayko/ai-architect-frontend.git ai-architect-frontend
 ```
 
 ### 3. Configure GCP Credentials:
