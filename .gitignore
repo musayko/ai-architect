@@ -1,0 +1,43 @@
+# Ignore Google Cloud credentials
+config/
+# IDE and OS specific files
+.DS_Store
+.idea/
+*.iml
+*~
+*.swp
+*#
+
+# Local environment files
+.env
+.env.*
+!.env.example
+
+# Build outputs (if any at root)
+/build/
+/target/
+
+# Sub-projects - these are their own Git repositories
+# Add these lines to ignore the content of your sub-repositories
+/ai-architect-backend/
+/ai-architect-frontend/
+
+
+config/
+media_files/*
+# To keep the media_files directory in git even if empty, add a .gitkeep file:
+# create an empty file named .gitkeep inside media_files/ and inside media_files/output/
+# then add these lines to .gitignore:
+!media_files/.gitkeep
+media_files/input/*
+!media_files/input/.gitkeep
+media_files/output/*
+!media_files/output/.gitkeep
+
+
+# Node modules (if any at root)
+node_modules/
+
+# Docker debug files (if any)
+docker-compose.debug.yml
+docker.log

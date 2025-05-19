@@ -1,0 +1,36 @@
+version: '3.8'
+services:
+  postgres_db:
+    image: postgres:15 
+    container_name: ai_architect_db 
+    environment:
+      POSTGRES_USER: architect_user 
+      POSTGRES_PASSWORD: architect_password 
+      POSTGRES_DB: ai_architect_dev 
+    ports:
+      - "5432:5432" 
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+  backend:
+    build: ./ai-architect-backend # Path to the directory containing the backend's Dockerfile
+    container_name: ai_architect_backend
+    ports:
+      - "8080:8080" # Maps port 8080 on the host to 8080 in the container
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres_db:5432/ai_architect_dev
+      - SPRING_DATASOURCE_USERNAME=architect_user
+      - SPRING_DATASOURCE_PASSWORD=architect_password
+      - APP_IMAGE_STORAGE_PATH=/app/media_files # Path inside the container for image storage
+      - GOOGLE_APPLICATION_CREDENTIALS=/app/secrets/gcp-vertex-ai-credentials.json
+    volumes:
+      - ./media_files:/app/media_files # Maps the local ./media_files directory to /app/media_files in the container
+      - ./config/gcp-vertex-ai-credentials.json:/app/secrets/gcp-vertex-ai-credentials.json:ro
+    depends_on:
+      - postgres_db # Ensures postgres_db starts before the backend
+  frontend:
+    build: ./ai-architect-frontend
+    container_name: ai_architect_frontend
+    ports:
+      - "3000:80"
+volumes:
+  postgres_data:
